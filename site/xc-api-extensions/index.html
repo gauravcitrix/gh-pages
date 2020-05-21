@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>XenCenter API Extension - Citrix</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "XenCenter API Extension";
+    var mkdocs_page_input_path = "xc-api-extensions.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Citrix</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../overview/">Overview</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../getting-started/">Getting Started</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../using/">Using</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../using-http/">Using HTTP</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../xs-api-extensions/">Citrix Hypervisor Management API Extensions</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">XenCenter API Extension</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#pool">Pool</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#host">Host</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#vm">VM</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sr">SR</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#vdi">VDI</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#vbd">VBD</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#network">Network</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#vm_guest_metrics">VM_guest_metrics</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#task">Task</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Citrix</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>XenCenter API Extension</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="xencenter-api-extensions">XenCenter API Extensions</h1>
+<p>The following section details the assumptions and API extensions that we
+have made, over and above the documented API. Extensions are encoded as
+particular key-value pairs in dictionaries such as <code>VM.other_config</code>.</p>
+<h2 id="pool">Pool</h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Semantics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pool.name_label</td>
+<td>An empty name_label indicates that the pool should be hidden on the tree view.</td>
+</tr>
+<tr>
+<td>pool.rolling_upgrade_in_progress</td>
+<td>Present if the pool is in the middle of a rolling upgrade.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="host">Host</h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Semantics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>host.other_config["iscsi_iqn"]</td>
+<td>The host's iSCSI IQN.</td>
+</tr>
+<tr>
+<td>host.license_params["expiry"]</td>
+<td>The expiry date of the host's license, in ISO 8601, UTC.</td>
+</tr>
+<tr>
+<td>host.license_params["sku_type"]</td>
+<td>The host license type i.e. Server or Enterprise.</td>
+</tr>
+<tr>
+<td>host.license_params["restrict_pooling"]</td>
+<td>Returns <code>true</code> if pooling is restricted by the host.</td>
+</tr>
+<tr>
+<td>host.license_params["restrict_connection"]</td>
+<td>The number of connections that can be made from XenCenter is restricted.</td>
+</tr>
+<tr>
+<td>host.license_params["restrict_qos"]</td>
+<td>Returns <code>true</code> if Quality of Service settings are enabled on the host.</td>
+</tr>
+<tr>
+<td>host.license_params["restrict_vlan"]</td>
+<td>Returns <code>true</code> if creation of virtual networks is restricted on the host.</td>
+</tr>
+<tr>
+<td>host.license_params["restrict_pool_attached_storage"]</td>
+<td>Returns <code>true</code> if the creation of shared storage is restricted on this host.</td>
+</tr>
+<tr>
+<td>host.software_version["product_version"]</td>
+<td>Returns the host's product version.</td>
+</tr>
+<tr>
+<td>host.software_version["build_number"]</td>
+<td>Returns the host's build number.</td>
+</tr>
+<tr>
+<td>host.software_version["xapi"]</td>
+<td>Returns the host's api revision number.</td>
+</tr>
+<tr>
+<td>host.software_version["package-linux"]</td>
+<td>Returns "installed" if the Linux pack has been installed.</td>
+</tr>
+<tr>
+<td>host.software_version["oem_build_number"]</td>
+<td>If the host is the OEM version, return its revision number.</td>
+</tr>
+<tr>
+<td>host.logging["syslog_destination"]</td>
+<td>Gets or sets the destination for the Citrix Hypervisor system logger (null for local logging).</td>
+</tr>
+<tr>
+<td>host.logging["multipathing"]</td>
+<td>"true" if storage multipathing is enabled on this host.</td>
+</tr>
+<tr>
+<td>host.logging["boot_time"]</td>
+<td>A floating point Unix time giving the time that the host booted.</td>
+</tr>
+<tr>
+<td>host.logging["agent_start_time"]</td>
+<td>A floating point Unix time giving the time that the control domain management daemon started.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vm">VM</h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Semantics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VM.other_config["default_template"]</td>
+<td>This template is one that was installed by . This is used to  selectively hide these in the tree view, to use a different icon for them, and to disallow deletion.</td>
+</tr>
+<tr>
+<td>VM.other_config["xensource_internal"]</td>
+<td>This template is special, such as the P2V server template. These are completely hidden by the UI.</td>
+</tr>
+<tr>
+<td>VM.other_config["install_distro"] == "rhlike"</td>
+<td>This template is for RHEL 5, or CentOS equivalents. This is used to prompt for the Install Repository during install, including       support for install from ISO / CD, and to modify NFS URLs to suit these installers.</td>
+</tr>
+<tr>
+<td>VM.other_config["install-repository"] == "cdrom"</td>
+<td>Requests an install from a repository in the VM's attached CD drive, rather than a URL.</td>
+</tr>
+<tr>
+<td>VM.other_config["auto_poweron"]</td>
+<td>Gets or sets whether the VM starts when the server boots, "true" or "false".</td>
+</tr>
+<tr>
+<td>VM.other_config["ignore_excessive_vcpus"]</td>
+<td>Gets or sets to ignore XenCenter warning if a VM has more VCPUs than its host has physical CPUs, <code>true</code> to ignore.</td>
+</tr>
+<tr>
+<td>VM.other_config["HideFromXenCenter"]</td>
+<td>Gets or sets whether  XenCenter will show the VM in the treeview, "true" to hide.</td>
+</tr>
+<tr>
+<td>VM.other_config["import_task"]</td>
+<td>Gets the import task that created this VM.</td>
+</tr>
+<tr>
+<td>VM.HVM_boot_params["order"]</td>
+<td>Gets or sets the VM's boot order on HVM VM's only, for example,  "CDN" will boot in the following order - First boot disk,  CD drive, Network.</td>
+</tr>
+<tr>
+<td>VM.VCPU_params["weight"]</td>
+<td>Gets or sets the IONice value for the VM's VCPUs, ranges from 1 to 65536, 65536 being the highest.</td>
+</tr>
+<tr>
+<td>VM.pool_migrate(..., options['live'])</td>
+<td><code>true</code> indicates live migration. XenCenter always uses this.</td>
+</tr>
+<tr>
+<td>VM.other_config["install-methods"]</td>
+<td>A comma-separated list of install methods available for this template. Can include "cdrom", "nfs", "http" or "ftp".</td>
+</tr>
+<tr>
+<td>VM.other_config["last_shutdown_time"]</td>
+<td>The time that this VM was last shut down or rebooted, formatted as a UTC ISO8601 datetime.</td>
+</tr>
+<tr>
+<td>VM.other_config["p2v_source_machine"]</td>
+<td>The source machine, if this VM was imported by a P2V process.</td>
+</tr>
+<tr>
+<td>VM.other_config["p2v_import_date"]</td>
+<td>The date the VM was imported, if it was imported by a P2V process. Formatted as a UTC ISO8601 datetime.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sr">SR</h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Semantics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SR.other_config["auto-scan"]</td>
+<td>The SR will be automatically scanned for changes. Set on all SRs created by XenCenter.</td>
+</tr>
+<tr>
+<td>SR.sm_config["type"]</td>
+<td>Set as type <code>cd</code> for SRs which are physical CD drives.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vdi">VDI</h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Semantics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VDI.type</td>
+<td><code>user</code> instead of <code>system</code> is used to mean "do or do not allow deletion of the VDI through the GUI, if this disk is attached to a VM". The intention here is to prevent you from corrupting a VM (you should uninstall it instead). <code>suspend</code> and <code>crashdump</code> record suspend and core dumps respectively. <code>ephemeral</code> is currently unused.</td>
+</tr>
+<tr>
+<td>VDI.managed</td>
+<td>All unmanaged VDIs are completely hidden in the UI. These are branch points in VHD chains, or unused LUN-per-VDI disks.</td>
+</tr>
+<tr>
+<td>VDI.sm_config["vmhint"]</td>
+<td>The UUID of the VM that this VDI supports. This is set when VDIs are created through the user interface, to improve performance for certain storage backends.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vbd">VBD</h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Semantics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VBD.other_config["owner"]</td>
+<td>If set, then this disk may be deleted when the VM is uninstalled.</td>
+</tr>
+<tr>
+<td>VBD.other_config["class"]</td>
+<td>Set to an integer, corresponding to the Best Effort setting of <code>ionice</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="network">Network</h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Semantics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>network.other_config["automatic"]</td>
+<td>The New VM wizard will create a VIF connected to this network by default, if this key has any value other than <code>false</code>.</td>
+</tr>
+<tr>
+<td>network.other_config["import_task"]</td>
+<td>Gets the import task that created this network.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vm_guest_metrics">VM_guest_metrics</h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Semantics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PV_drivers_version["major"]</td>
+<td>Gets the major version of the VM's PV drivers' version.</td>
+</tr>
+<tr>
+<td>PV_drivers_version["minor"]</td>
+<td>Gets the minor version of the VM's PV drivers' version.</td>
+</tr>
+<tr>
+<td>PV_drivers_version["micro"]</td>
+<td>Gets the micro (build number) of the VM's PV drivers' version.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="task">Task</h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Semantics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>task.other_config["object_creation"] == "complete"</td>
+<td>For the task associated with a VM import, this flag will be set when all the objects (VMs, networks) have been created. This is useful in the import VM wizard for us to then go and re-map all the networks that need it.</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../xs-api-extensions/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
